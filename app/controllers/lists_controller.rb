@@ -21,6 +21,18 @@ class ListsController < ApplicationController
         end
     end
 
+    def update
+        @list = List.find(params[:id])
+        if @list.update(list_params)
+          render json: { success: true, message: 'List updated successfully' }
+            else
+          render json: { success: false, message: 'Error updating list' }
+        end
+    end
+
+    def list_params
+        params.require(:list).permit(:title, :description)
+    end 
     private
     def set_list
         @lists = List.includes(:tasks).all

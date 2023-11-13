@@ -3,7 +3,7 @@
     <strong id="listTitle<%= list.id %>"><%= list.title %></strong>
     <button class="edit-list-btn btn btn-primary right" data-list-id="<%= list.id %>" data-edit-mode="edit">Edit</button>
     <%= form_with(model: list, method: :delete, data: { confirm: 'Você tem certeza?' }) do |form| %>
-      <%= form.submit 'X', class: 'btn btn-primary right' %>
+      <%= form.submit 'X', class: 'btn btn-primary right', id: "deleteBtn#{list.id}" %>
     <% end %>
   </div>
 
