@@ -1,0 +1,17 @@
+<div class="head-div-list">
+  <div class="group-head-div">
+    <strong id="listTitle<%= list.id %>"><%= list.title %></strong>
+    <button class="edit-list-btn btn btn-primary right" data-list-id="<%= list.id %>" data-edit-mode="edit">Edit</button>
+    <%= form_with(model: list, method: :delete, data: { confirm: 'Você tem certeza?' }) do |form| %>
+      <%= form.submit 'X', class: 'btn btn-primary right' %>
+    <% end %>
+  </div>
+
+  <p class="text-info" id="listNote<%= list.id %>"><%= list.description %></p>
+</div>
+
+<% list.tasks.each do |task| %>
+  <%= render partial: 'tasks/show', locals: { task: task } %>
+<% end %>
+
+<button class="openModalBtn btn" data-list-id="<%= list.id %>">Add task</button>

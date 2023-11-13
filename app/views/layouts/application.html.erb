@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ToDo</title>
+    <title>TodoList</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,6 +11,33 @@
   </head>
 
   <body>
+    <div class="div-header">
+          <h1>ToDo</h1>
+          <%= link_to 'New List', "#", class: 'btn btn-primary' %>
+    </div>
+
     <%= yield %>
+
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="closeModalBtn">&times;</span>
+        <h2>New Task</h2>
+        <%= form_with(model: Task.new, url: tasks_path, remote: true) do |form| %>
+          <div class="field">
+          <%= form.label :title %>
+          <%= form.text_field :title %>
+          </div>
+          <div class="field">
+          <%= form.label :note %>
+          <%= form.text_area :note %>
+          </div>
+          <%= form.hidden_field :list_id, value: '', id: 'taskListId' %>
+          <div class="actions">
+          <%= form.submit 'Create', class: 'btn', id: 'createTaskBtn' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
   </body>
 </html>

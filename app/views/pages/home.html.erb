@@ -1,0 +1,11 @@
+<container>
+  <% if @lists.empty? %>
+    <span class="text-warning">Não há listas!</span>
+  <% else %>
+      <% @lists.each do |list| %>
+        <div class="list-item">
+          <%= render partial: 'lists/show', locals: { list: list } %>
+        </div>
+      <% end %>
+  <% end %>
+</container>

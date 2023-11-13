@@ -1,0 +1,15 @@
+<div class="task-item-<%= task.id %>">
+    <div class="group-head-div">
+        <strong><%= task.title %></strong>
+        <%= form_with(model: task, method: :delete, data: { confirm: 'Você tem certeza?' }) do |form| %>
+            <%= form.submit 'X', class: 'btn btn-primary right' %>
+        <% end %>
+    </div>
+    <p><%= task.note %></p>
+    <% if task.completed %>
+        <p class="task-completed-green"><%= task.completed %></p>
+    <% else%>
+        <p class="task-completed-red"><%= task.completed %></p>
+    <% end %>
+        <!-- Adicione aqui qualquer informação adicional que você queira exibir para cada tarefa -->
+</div>
