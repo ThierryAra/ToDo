@@ -31,7 +31,9 @@
           <%= form.label :note %>
           <%= form.text_area :note %>
           </div>
+          <%= form.hidden_field :completed, value: 'false' %>
           <%= form.hidden_field :list_id, value: '', id: 'taskListId' %>
+
           <div class="actions">
           <%= form.submit 'Create', class: 'btn', id: 'createTaskBtn' %>
           </div>
