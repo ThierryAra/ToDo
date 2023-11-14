@@ -8,7 +8,7 @@ class TasksController < ApplicationController
     
         if @task.save
           flash[:success] = 'Task created successfully!'
-        else
+          else
             flash[:error] = 'Failed to create task.'
         end
         
@@ -17,7 +17,23 @@ class TasksController < ApplicationController
   
     def destroy
         @task = Task.find(params[:id])
-        @task.destroy
+        
+        if @task.destroy
+            flash[:success] = 'Task deleted successfully!'
+            else
+                flash[:error] = 'Failed to delete task.'
+        end
+
+        redirect_back(fallback_location: root_path)
+    end
+
+    def update
+        @task = Task.find(params[:id])
+        if @task.update(task_params)
+            flash[:success] = 'Task updated successfully!'
+            else
+                flash[:error] = 'Failed to update task.'
+        end
 
         redirect_back(fallback_location: root_path)
     end

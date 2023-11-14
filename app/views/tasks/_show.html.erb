@@ -1,6 +1,7 @@
 <div class="task-item-<%= task.id %>">
     <div class="group-head-div">
         <strong><%= task.title %></strong>
+        <button class="edit-task-btn btn btn-primary right" data-task-id="<%= task.id %>">Edit</button>
         <%= form_with(model: task, method: :delete, data: { confirm: 'Você tem certeza?' }) do |form| %>
             <%= form.submit 'X', class: 'btn btn-primary right' %>
         <% end %>

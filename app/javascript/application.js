@@ -63,15 +63,48 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-// ---------------- Open/Close Modal to create Task
-document.addEventListener('click', function(event) {
+  // ---------------- Open/Close Modal to create/edit Task
+  document.addEventListener('click', function(event) {
     let closeModalBtn = document.getElementById('closeModalBtn');
     let modal = document.getElementById('myModal');
+    let modalForm = document.getElementById('editCreateTask');
+    let modalBtn = document.getElementById('modalBtn');
+    let listId = -1;
+
+    if (event.target.classList.contains('edit-task-btn')) {
+      let taskDiv = event.target.parentNode.parentNode;
+      let listDiv = taskDiv.parentNode; 
+      
+      let taskId = taskDiv.classList[0].split('-')[2];
+      listId = listDiv.querySelector('button').getAttribute('data-list-id');
+      
+      modalBtn.value = 'Confirm';
+      modalForm.action = `/tasks/${taskId}`;
+      modalForm.method = 'patch';
+
+      let taskTitle = document.querySelector(`.task-item-${taskId} strong`).textContent;
+      let taskNote = document.querySelector(`.task-item-${taskId} p`).textContent;
+      let taskCompleted = document.querySelectorAll(`.task-item-${taskId} p`)[1].textContent;
+
   
-    if (event.target.classList.contains('openModalBtn')) {
-      let listId = event.target.getAttribute('data-list-id');
+      // Preencher os campos do formulário com os dados da tarefa
       document.getElementById('taskListId').value = listId;
-  
+      document.getElementById('modalTaskTitle').value = taskTitle;
+      document.getElementById('modalTaskNote').value = taskNote;
+      document.getElementById('modalTaskCompleted').value = taskCompleted;
+      // Show modal
+      modal.style.display = 'block';
+    }else if (event.target.classList.contains('openModalBtn')) {
+      modalBtn.value = 'Create';
+      modalForm.action = '/tasks'
+      modalForm.method = 'post'
+
+      listId = event.target.getAttribute('data-list-id');
+
+      document.getElementById('taskListId').value = listId;
+      document.getElementById('modalTaskTitle').value = '';
+      document.getElementById('modalTaskNote').value = '';
+      document.getElementById('modalTaskCompleted').value = 'false';
       // Show modal
       modal.style.display = 'block';
     }
