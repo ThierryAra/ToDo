@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       let taskTitle = document.querySelector(`.task-item-${taskId} strong`).textContent;
       let taskNote = document.querySelector(`.task-item-${taskId} p`).textContent;
-      let taskCompleted = document.querySelectorAll(`.task-item-${taskId} p`)[1].textContent;
+      let taskCompleted = taskDiv.querySelector('.switch-input.task-checkbox').checked;
 
   
       // Preencher os campos do formulário com os dados da tarefa
@@ -119,4 +119,37 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
+
+  function updateCompleted(checkbox) {
+      let completed = checkbox.checked;
+      let taskId = checkbox.dataset.taskId; // Supondo que o valor seja o ID da task
+      let title = checkbox.dataset.title;
+      let note = checkbox.dataset.note;
+      let listId = checkbox.dataset.listId;
+    
+      // Agora você pode fazer o que quiser com esses dados
+      console.log(`Task ID: ${taskId}, Completed: ${completed}, Title: ${title}, Note: ${note}, List ID: ${listId}`);
+    
+      // Além disso, você pode enviar esses dados para o servidor usando uma solicitação AJAX, se necessário
+      // Exemplo de requisição usando Fetch API
+      fetch(`/tasks/${taskId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content,
+        },
+        body: JSON.stringify({ task: { title: title, note: note, completed: completed, listId: listId } }),
+      })
+      .then(response => response)
+      .then(data => console.log(data))
+      .catch(error => console.error('Error:', error));
+  }
+
+  // Adicionando o evento onchange a todos os checkboxes com a classe 'task-checkbox'
+  // let checkboxes = document.querySelectorAll('.task-checkbox');
+  // checkboxes.forEach(function(checkbox) {
+  //     checkbox.addEventListener('change', function() {
+  //         updateCompleted(this);
+  //     });
+  // });
 });

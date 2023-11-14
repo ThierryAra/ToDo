@@ -7,10 +7,16 @@
         <% end %>
     </div>
     <p><%= task.note %></p>
-    <% if task.completed %>
-        <p class="task-completed-green"><%= task.completed %></p>
-    <% else%>
-        <p class="task-completed-red"><%= task.completed %></p>
-    <% end %>
-        <!-- Adicione aqui qualquer informação adicional que você queira exibir para cada tarefa -->
+    <div class="task-switch">
+        <%= form_with(model: task, method: :patch, url: task_path(task), remote: true) do |form| %>
+            <label class="switch">
+                <%= form.check_box :completed, 
+                    class: "switch-input task-checkbox", 
+                    data: { task_id: task.id, title: task.title, note: task.note, list_id: task.list_id },
+                    onchange: "this.form.submit();"
+                %>
+                <span class="slider round"></span>
+            </label>
+        <% end %>
+    </div>
 </div>
