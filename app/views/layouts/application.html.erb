@@ -21,7 +21,7 @@
     <div id="myModal" class="modal">
       <div class="modal-content">
         <span class="close" id="closeModalBtn">&times;</span>
-        <h2>New Task</h2>
+        <h2 class="modal-title">New Task</h2>
         <%= form_with(model: Task, url: '', remote: true, id:'editCreateTask') do |form| %>
           <div class="field">
           <%= form.label :title %>
@@ -35,7 +35,7 @@
           <%= form.hidden_field :list_id, value: '', id: 'taskListId' %>
 
           <div class="actions">
-          <%= form.submit '', class: 'btn', id: 'modalBtn' %>
+          <%= form.submit '', class: 'btn modal-btn', id: 'modalBtn' %>
           </div>
         <% end %>
       </div>
