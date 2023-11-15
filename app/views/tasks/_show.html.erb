@@ -1,21 +1,28 @@
-<div class="task-item-<%= task.id %>">
+<div class="task-div task-item-<%= task.id %>">
     <div class="group-head-div">
-        <strong><%= task.title %></strong>
-        <button class="edit-task-btn btn btn-primary" data-task-id="<%= task.id %>">Edit</button>
+    <button class="edit-task-btn task-title-<%= task.id %>" data-task-id="<%= task.id %>">
+        <%= task.title %>
+    </button>
         <%= form_with(model: task, method: :delete, data: { confirm: 'Você tem certeza?' }) do |form| %>
-            <%= form.submit 'X', class: 'btn btn-primary' %>
+            <%= form.button nil, class: "btn-delete-task btn btn-primary" do %>
+                <i class="fa-solid fa-trash-can-arrow-up"></i>            
+            <% end %>
         <% end %>
     </div>
-    <p><%= task.note %></p>
-    <div class="task-switch">
-        <%= form_with(model: task, method: :patch, url: task_path(task), remote: true) do |form| %>
-            <label class="switch">
-                <%= form.check_box :completed, 
-                    class: "switch-input task-checkbox", 
-                    onchange: "this.form.submit();"
-                %>
-                <span class="slider round"></span>
-            </label>
-        <% end %>
+
+    <div class="group-head-div note">
+        <p><%= task.note %></p>
+        <div class="task-switch">
+            <%= form_with(model: task, method: :patch, url: task_path(task), remote: true) do |form| %>
+                <label class="switch">
+                    <%= form.check_box :completed, 
+                        class: "switch-input task-checkbox", 
+                        onchange: "this.form.submit();"
+                    %>
+                    <span class="slider round"></span>
+                </label>
+            <% end %>
+        </div>
+
     </div>
 </div>

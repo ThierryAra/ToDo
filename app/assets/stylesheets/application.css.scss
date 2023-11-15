@@ -1,0 +1,335 @@
+@import url('https://fonts.googleapis.com/css?family=Fredericka+the+Great|Zilla+Slab:300,400');
+@import "font-awesome";
+
+$mainColor: #160F29;
+$secColor: #246A73;
+$tenColor: #368F8B;
+$quaColor: #F3DFC1;
+$quiColor: #DDBEA8;
+$backgColor: $mainColor;
+
+body {
+    margin: 10px;
+    padding: 0px;
+    background: $backgColor;
+    color: $quiColor;
+    font-family: 'zilla slab', serif;
+    overflow-wrap: break-word;
+}
+.note p {
+  word-wrap: break-word;
+
+}
+/* Application.html.erb */
+.div-header{
+  font-family: 'fredericka the great', cursive;
+  text-align: center;  
+}
+
+.div-header h1{
+  font-size: 80px; 
+  margin-bottom: 15px;
+  color: white;
+}
+
+.div-header .btn {
+  background-color: $backgColor; 
+  color:  $tenColor;
+  font-size: 30px;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+  
+.modal-content {
+    background-color: #160f29;
+    color: #246a73;
+    
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 15% auto;
+    padding: 20px;
+    width: 30%;
+    
+    border: none;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+.close {
+    display: flex;
+    justify-content: flex-end;
+
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: $quaColor;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn {
+    background-color: #246A73;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#modalTaskTitle {
+  height: 25px;
+}
+
+/* Container   lists */
+container {
+  margin-top: 20px;
+  
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.list-item {
+  width: 250px;
+  margin: 10px;
+  border-radius: 5px;
+
+  display: flex;
+  flex-direction: column;
+
+  height: fit-content;
+  background-color: white;
+  box-shadow: .3rem .3rem 1rem rgba(243, 223, 193, 0.6);
+}
+
+.head-div-list form {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.head-div-list form input {
+  font-size: 10px;
+  padding: 5px;
+}
+
+.group-head-div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 5px 0 0;
+}
+
+.group-head-div .title {
+  color: $mainColor;
+  font-size: 20px;
+  text-align: center;
+  width: 100%;
+  margin: 5px;
+  font-family: 'fredericka the great', cursive;
+}
+
+.group-head-div p {
+  text-align: center;
+  font-style: italic;
+}
+
+.btn-delete-list{
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  height: 15px;
+  width: 10px;
+  padding: 3px 15px 0 0;
+  border: none;
+  color: $mainColor;
+  background: transparent;
+}
+
+.text-info {
+  text-align: center;
+  padding: 0 5px 0 5px;
+  margin: 3px 0 5px 0;
+}
+
+.edit-list-btn {
+  background: transparent;
+  color: $secColor;
+  padding: 0px;
+  width: 50px;
+  height: 20px;
+}
+
+.btn-delete-task{
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  height: 15px;
+  width: 10px;
+  padding: 3px 15px 0 0;
+  border: none;
+  color: $mainColor;
+  background: transparent;
+}
+
+hr {
+  width: 80%;
+}
+
+/* Tasks _show */ 
+.edit-task-btn {
+  background: transparent;
+  text-align: start;
+  border: none;
+  font-weight: bolder;
+  font-family: 'fredericka the great', cursive;
+  cursor: pointer;
+  width: 80%;
+}
+
+.task-div {
+  padding: 5px;
+}
+
+.note p{
+  text-align:  start;
+  margin-left: 5px;
+  width: 80%;
+  font-style: italic;
+} 
+
+/* Switch button */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 38px;
+  height: 23px;
+  border-radius: 17px; 
+  overflow: hidden; 
+}
+
+.switch-input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 17px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 15px;
+  width: 15px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+.switch-input:checked + .slider {
+  background-color: #2196F3;
+}
+
+.switch-input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+.switch-input:checked + .slider:before {
+  -webkit-transform: translateX(15px);
+  -ms-transform: translateX(15px);
+  transform: translateX(15px);
+}
+
+// Input style
+.input {
+  position:relative;
+  font-size: 0.6em;
+
+  padding: 3px;
+
+  display: inline-block;
+
+  border-radius: 0.5em;
+
+  *:not(span) {
+    position: relative;
+    display: inherit;
+    border-radius: inherit;
+    margin: 0;
+    border: none;
+    outline: none;
+    padding: 0 .325em;
+    z-index: 1; 
+    
+    &:focus + span {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+	
+	span {
+		transform: scale(.993, .94);
+		transition: transform .5s, opacity .25s;
+		opacity: 0;
+		
+		position:absolute;
+		z-index: 0;
+		margin:4px;
+		left:0;
+		top:0;
+		right:0;
+		bottom:0;
+		border-radius: inherit;
+		pointer-events: none;
+
+		box-shadow: inset 0 0 0 3px #fff,
+			0 0 0 4px #fff,
+			3px -3px 30px  $mainColor, 
+			-3px 3px 30px $quaColor;
+	}
+
+  textarea{
+    resize: none;
+    width: inherit;
+    height: 60px;
+  }
+}
+
+::placeholder {
+	color:#cbd0d5;
+}
+
+html::after {
+	content:'';
+	background: linear-gradient(21deg, $mainColor, $quaColor);
+	height:3px;
+	width:100%;
+	position:absolute;
+	left:0;
+	top:0;
+}

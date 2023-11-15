@@ -4,11 +4,11 @@ class ListsController < ApplicationController
     def new
         @list = List.create(title: 'New list', description: 'description')
         
-        redirect_back(fallback_location: root_path)
+        redirect_to root_path
     end
 
     def show
-        redirect_back(fallback_location: root_path)
+        redirect_to root_path
     end
 
     def destroy

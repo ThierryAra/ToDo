@@ -38,21 +38,23 @@ document.addEventListener('DOMContentLoaded', function() {
       let titleElement = document.getElementById('listTitle' + listId);
       let noteElement = document.getElementById('listNote' + listId);
       let editBtn = e.currentTarget;
-
-      // Hide the delete button when the Edit button is clicked
-      document.getElementById(`deleteBtn${listId}`).style.display = 'none';
+      let span = editBtn.getElementsByTagName('span')[0];
+      let i = editBtn.getElementsByTagName('i')[0];
 
       if (editBtn.dataset.editMode === 'edit') {
-        editBtn.textContent = 'Confirm';
+
+        i.style.display = 'none';
+        span.textContent = 'Confirm';
         editBtn.dataset.editMode = 'confirm';
 
         enableEditable(titleElement);
         enableEditable(noteElement);
 
       } else if (editBtn.dataset.editMode === 'confirm') {
-        editBtn.textContent = 'Edit';
+        span.textContent = '';
         editBtn.dataset.editMode = 'edit';
-  
+        i.style.display = 'inline';
+
         saveChanges(
           listId, 
           { title: titleElement.textContent, description: noteElement.textContent },
@@ -75,18 +77,17 @@ document.addEventListener('DOMContentLoaded', function() {
       let taskDiv = event.target.parentNode.parentNode;
       let listDiv = taskDiv.parentNode; 
       
-      let taskId = taskDiv.classList[0].split('-')[2];
-      listId = listDiv.querySelector('button').getAttribute('data-list-id');
-      
+      let taskId = taskDiv.classList[1].split('-')[2];
+      listId = listDiv.querySelector('.openModalBtn').getAttribute('data-list-id');
+
       modalBtn.value = 'Confirm';
       modalForm.action = `/tasks/${taskId}`;
       modalForm.method = 'patch';
-
-      let taskTitle = document.querySelector(`.task-item-${taskId} strong`).textContent;
+      
+      let taskTitle = document.querySelector(`.task-title-${taskId}`).textContent.trim();
       let taskNote = document.querySelector(`.task-item-${taskId} p`).textContent;
       let taskCompleted = taskDiv.querySelector('.switch-input.task-checkbox').checked;
-
-  
+      
       // Preencher os campos do formulário com os dados da tarefa
       document.getElementById('taskListId').value = listId;
       document.getElementById('modalTaskTitle').value = taskTitle;

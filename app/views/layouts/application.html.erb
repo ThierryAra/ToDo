@@ -6,13 +6,13 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
     <div class="div-header">
-          <h1>ToDo</h1>
+          <h1>To-Do Lists</h1>
           <%= link_to 'New List', new_list_path, class: 'btn btn-primary' %>
     </div>
 
@@ -23,19 +23,30 @@
         <span class="close" id="closeModalBtn">&times;</span>
         <h2 class="modal-title">New Task</h2>
         <%= form_with(model: Task, url: '', remote: true, id:'editCreateTask') do |form| %>
-          <div class="field">
           <%= form.label :title %>
-          <%= form.text_field :title, id: 'modalTaskTitle'%>
+          <div class="field">
+            <p>
+              <span class="input">
+              <%= form.text_field :title, id: 'modalTaskTitle', maxlength:'50', size:'auto'%>
+                <span></span>	
+              </span>
+            </p>
           </div>
           <div class="field">
           <%= form.label :note %>
-          <%= form.text_area :note, id: 'modalTaskNote' %>
+          <div class="field">
+            <p>
+            <span class="input">
+              <%= form.text_area :note, id: 'modalTaskNote',  maxlength:'50' %>
+              <span></span>	
+            </span>
+          </p>
           </div>
           <%= form.hidden_field :completed, value: 'false', id: 'modalTaskCompleted' %>
           <%= form.hidden_field :list_id, value: '', id: 'taskListId' %>
 
           <div class="actions">
-          <%= form.submit '', class: 'btn modal-btn', id: 'modalBtn' %>
+          <%= form.submit 'Create', class: 'btn modal-btn', id: 'modalBtn' %>
           </div>
         <% end %>
       </div>

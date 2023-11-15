@@ -1,21 +1,28 @@
 <div class="head-div-list">
-  <div class="group-head-div">
-    <strong id="listTitle<%= list.id %>"><%= list.title %></strong>
-    <button class="edit-list-btn btn btn-primary" 
-            data-list-id="<%= list.id %>" 
-            data-edit-mode="edit">
-              Edit
-    </button>
-    <%= form_with(model: list, 
-                  method: :delete, 
-                  data: { confirm: 'Você tem certeza?' }) do |form| %>
-      <%= form.submit 'X', class: 'btn btn-primary', id: "deleteBtn#{list.id}" %>
+  <%= form_with(model: list, 
+                method: :delete, 
+                data: { confirm: 'Você tem certeza?' }) do |form| %>
+    <%= form.button nil, 
+      class: "btn-delete-list btn btn-primary", 
+      id: "deleteBtn#{list.id}" do
+    %>
+      <i class="fa-solid fa-xmark"></i>
     <% end %>
+  <% end %>
+  <div class="group-head-div">
+      <p id="listTitle<%= list.id %>" class='title'><%= list.title %></p>
+      
+      <button class="edit-list-btn btn btn-primary" 
+              data-list-id="<%= list.id %>" 
+              data-edit-mode="edit"
+      >
+        <i class="fa-regular fa-pen-to-square"></i>
+        <span class="button-text-<%= list.id %>"></span>
+      </button>
   </div>
-
   <p class="text-info" id="listNote<%= list.id %>"><%= list.description %></p>
 </div>
-
+<hr>
 <% list.tasks.each do |task| %>
   <%= render partial: 'tasks/show', locals: { task: task } %>
 <% end %>
