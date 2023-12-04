@@ -1,3 +1,4 @@
-class Task < ApplicationRecord
-  belongs_to :list
-end
+  class Task < ApplicationRecord
+    belongs_to :list
+    validates :title, presence: true
+  end
