@@ -11,6 +11,18 @@
   </head>
 
   <body>
+    <% if session[:reload_root] %>
+      <script>
+        // Force reload
+        if (window.location.pathname === '<%= root_path %>') {
+          location.reload();
+        }
+      </script>
+
+      <% session.delete(:reload_root) %>
+      <% flash.replace(session.delete(:flash_message) || {}) %>
+    <% end %>
+    
     <div class="div-header">
           <h1>To-Do Lists</h1>
           <%= link_to 'New List', new_list_path, class: 'btn btn-primary' %>
@@ -18,7 +30,11 @@
 
     <%= yield %>
 
-    <div id="myModal" class="modal">
+    <div id="divFlashMessage">
+      <p id="flashMessage"><%= flash[:success] || flash[:error] %></p>
+    </div>
+    
+    <div id="myModal" class="modal-task">
       <div class="modal-content">
         <span class="close" id="closeModalBtn">&times;</span>
         <h2 class="modal-title">New Task</h2>
@@ -44,7 +60,7 @@
           </div>
           <%= form.hidden_field :completed, value: 'false', id: 'modalTaskCompleted' %>
           <%= form.hidden_field :list_id, value: '', id: 'taskListId' %>
-
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
           <div class="actions">
           <%= form.submit 'Create', class: 'btn modal-btn', id: 'modalBtn' %>
           </div>

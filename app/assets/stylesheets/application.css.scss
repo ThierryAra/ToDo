@@ -39,7 +39,7 @@ body {
 }
 
 /* Modal */
-.modal {
+.modal-task {
     display: none;
     position: fixed;
     top: 0;
@@ -94,12 +94,13 @@ body {
   height: 25px;
 }
 
-/* Container   lists */
+/* Container lists */
 container {
   margin-top: 20px;
   
   display: flex;
   flex-direction: row;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
@@ -324,12 +325,24 @@ hr {
 	color:#cbd0d5;
 }
 
-html::after {
-	content:'';
-	background: linear-gradient(21deg, $mainColor, $quaColor);
-	height:3px;
-	width:100%;
-	position:absolute;
-	left:0;
-	top:0;
+// Flash message
+#divFlashMessage {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  background-color: $secColor;
+  color: black;
+  padding: 5px;
+  border-radius: 5px;
+  z-index: 1;
+  display: none;
+}
+
+#flashMessage{
+  margin: 3px;
+}
+
+#closeFlashMessage{
+  color: black;
+  font-size: 20px;
 }

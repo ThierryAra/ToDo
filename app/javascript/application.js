@@ -3,7 +3,7 @@ import "@hotwired/turbo-rails"
 import "controllers"
 
 document.addEventListener('DOMContentLoaded', function() {
-  // --------------- Edit list title/description
+  // --------------- Edit list - title/description
   function enableEditable(element) {
     element.contentEditable = true;
   }
@@ -65,10 +65,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
+  
   // ---------------- Open/Close Modal to create/edit Task
+  let modal = document.getElementById('myModal');
+  
   document.addEventListener('click', function(event) {
-    let closeModalBtn = document.getElementById('closeModalBtn');
-    let modal = document.getElementById('myModal');
     let modalForm = document.getElementById('editCreateTask');
     let modalBtn = document.getElementById('modalBtn');
     let listId = -1;
@@ -93,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('modalTaskTitle').value = taskTitle;
       document.getElementById('modalTaskNote').value = taskNote;
       document.getElementById('modalTaskCompleted').value = taskCompleted;
-      // Show modal
+      
       modal.style.display = 'block';
     }else if (event.target.classList.contains('openModalBtn')) {
       modalBtn.value = 'Create';
@@ -106,10 +107,11 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('modalTaskTitle').value = '';
       document.getElementById('modalTaskNote').value = '';
       document.getElementById('modalTaskCompleted').value = 'false';
-      // Show modal
+      
       modal.style.display = 'block';
     }
   
+    let closeModalBtn = document.getElementById('closeModalBtn');
     closeModalBtn.addEventListener('click', function () {
       modal.style.display = 'none';
     });
@@ -120,4 +122,15 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
+  
+  // ---------------- Flash modal
+  let flashModal = document.getElementById('divFlashMessage');
+  
+  if (document.getElementById('flashMessage').innerText.trim() !== '') {
+    flashModal.style.display = 'block';
+    setTimeout(function () {
+      flashModal.style.display = 'none';
+      document.getElementById('flashMessage').innerText = '';
+    }, 3000);
+  }
 });
